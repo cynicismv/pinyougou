@@ -1,0 +1,4 @@
+package com.pinyougou.search.service;
+
+public interface ItemSearchService {
+}
