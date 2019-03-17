@@ -127,7 +127,7 @@ public class GoodsController {
 		return goodsService.findPage(goods, page, rows);		
 	}
 	//更新状态
-	@RequestMapping("/updateMarkettable")
+	@RequestMapping("/updateMarketable")
 	public Result updateMarketable(Long[] ids,String marketable){
 		try {
 			goodsService.updateMarketable(ids,marketable);

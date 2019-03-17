@@ -1,4 +1,4 @@
-package com.alicom.dysms.api;
+package cn.itcast.sms;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -6,17 +6,15 @@ import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsResponse;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.dysmsapi.transform.v20170525.SendSmsResponseUnmarshaller;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.FormatType;
-import com.aliyuncs.http.HttpResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created on 17/6/7.
@@ -29,7 +27,8 @@ import java.util.UUID;
  * 备注:Demo工程编码采用UTF-8
  * 国际短信发送请勿参照此DEMO
  */
-public class SmsDemo {
+@Component
+public class SmsUtil {
 
     //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";
@@ -37,10 +36,14 @@ public class SmsDemo {
     static final String domain = "dysmsapi.aliyuncs.com";
 
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "LTAIG0OkJBwF0nf7";
-    static final String accessKeySecret = "aWNh9CRNDDFbyiTOR1Suk15bGws0R8";
+    @Autowired
+    private Environment env;
+   /* static final String accessKeyId = "LTAIG0OkJBwF0nf7";
+    static final String accessKeySecret = "aWNh9CRNDDFbyiTOR1Suk15bGws0R8";*/
 
-    public static SendSmsResponse sendSms() throws ClientException {
+    public  SendSmsResponse sendSms(String mobile,String template_code,String sign_name,String param) throws ClientException {
+        String accessKeyId=env.getProperty("accessKeyId");
+        String accessKeySecret=env.getProperty("accessKeySecret");
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -54,13 +57,13 @@ public class SmsDemo {
         //组装请求对象-具体描述见控制台-文档部分内容
         SendSmsRequest request = new SendSmsRequest();
         //必填:待发送手机号
-        request.setPhoneNumbers("13594375644");
+        request.setPhoneNumbers(mobile);
         //必填:短信签名-可在短信控制台中找到
-        request.setSignName("上进青年");
+        request.setSignName(sign_name);
         //必填:短信模板-可在短信控制台中找到
-        request.setTemplateCode("SMS_134328095");
+        request.setTemplateCode(template_code);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"code\":\"123456\"}");
+        request.setTemplateParam(param);
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
@@ -75,8 +78,9 @@ public class SmsDemo {
     }
 
 
-    public static QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException {
-
+    public  QuerySendDetailsResponse querySendDetails(String mobile,String bizId) throws ClientException {
+        String accessKeyId=env.getProperty("accessKeyId");
+        String accessKeySecret=env.getProperty("accessKeySecret");
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -89,7 +93,7 @@ public class SmsDemo {
         //组装请求对象
         QuerySendDetailsRequest request = new QuerySendDetailsRequest();
         //必填-号码
-        request.setPhoneNumber("13594375644");
+        request.setPhoneNumber(mobile);
         //可选-流水号
         request.setBizId(bizId);
         //必填-发送日期 支持30天内记录查询，格式yyyyMMdd
@@ -105,6 +109,7 @@ public class SmsDemo {
 
         return querySendDetailsResponse;
     }
+/*
 
     public static void main(String[] args) throws ClientException, InterruptedException {
 
@@ -141,5 +146,7 @@ public class SmsDemo {
             System.out.println("RequestId=" + querySendDetailsResponse.getRequestId());
         }
 
+
     }
+    */
 }

@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from tb_content
     where id = #{id,jdbcType=BIGINT}
@@ -102,12 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pinyougou.pojo.TbContent" >
-    insert into tb_content (id, category_id, title,
-    url, pic, status, sort_order
-    )
-    values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
-    #{url,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER}
-    )
+    insert into tb_content (id, category_id, title, 
+      url, pic, status, sort_order
+      )
+    values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbContent" >
     insert into tb_content
@@ -196,12 +196,12 @@
   <update id="updateByExample" parameterType="map" >
     update tb_content
     set id = #{record.id,jdbcType=BIGINT},
-    category_id = #{record.categoryId,jdbcType=BIGINT},
-    title = #{record.title,jdbcType=VARCHAR},
-    url = #{record.url,jdbcType=VARCHAR},
-    pic = #{record.pic,jdbcType=VARCHAR},
-    status = #{record.status,jdbcType=VARCHAR},
-    sort_order = #{record.sortOrder,jdbcType=INTEGER}
+      category_id = #{record.categoryId,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      sort_order = #{record.sortOrder,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

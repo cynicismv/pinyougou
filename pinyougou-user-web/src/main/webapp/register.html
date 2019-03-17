@@ -56,10 +56,17 @@
 							<input type="text"  ng-model="entity.phone" placeholder="请输入你的手机号" class="input-xfat input-xlarge">
 						</div>
 					</div>
-					<div class="control-group">
+					<!--<div class="control-group">
 						<label for="inputPassword" class="control-label">短信验证码：</label>
 						<div class="controls">
 							<input type="text" placeholder="短信验证码" ng-model="smscode" class="input-xfat input-xlarge">  <a href="#" ng-click="sendCode()">获取短信验证码</a>
+						</div>
+					</div>-->
+					<div class="control-group">
+						<label for="inputPassword" class="control-label">短信验证码：</label>
+						<div class="controls">
+							<input type="text" placeholder="短信验证码" ng-model="smscode" class="input-xfat input-xlarge">
+							<a ng-click="sendCode()" ng-bind="btnMsg"></a>
 						</div>
 					</div>
 					

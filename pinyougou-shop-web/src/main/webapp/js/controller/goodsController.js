@@ -239,6 +239,7 @@ app.controller('goodsController' ,function($scope,$controller,$location,goodsSer
 			}
 		}
     }
+    $scope.marketable=["下架","上架"];
     //更改状态
     $scope.updateMarketable=function (marketable) {
         goodsService.updateMarketable($scope.selectIds,marketable).success(

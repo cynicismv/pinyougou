@@ -27,11 +27,11 @@ public class QueueController {
 	
 	@RequestMapping("/sendmap")
 	public void sendMap(){
-		Map map=new HashMap<>();
-		map.put("mobile", "13683391759");
-		map.put("template_code", "SMS_86640114");
-		map.put("sign_name","黑马");
-		map.put("param", "{\"name\":\"小蔡\"}");
+		Map map=new HashMap();
+		map.put("mobile", "13594375644");
+		map.put("template_code", "SMS_134328095");
+		map.put("sign_name","上进青年");
+		map.put("param", "{\"code\":\"123456\"}");
 		
 		jmsMessagingTemplate.convertAndSend("sms", map);
 	}
