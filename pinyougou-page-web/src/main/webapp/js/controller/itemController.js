@@ -1,4 +1,4 @@
-app.controller("itemController",function ($scope) {
+app.controller("itemController",function ($scope,$http) {
     $scope.specificationItems={};//存储用户选择的规格
    //数量加减
    $scope.addNum=function (x) {
@@ -50,8 +50,21 @@ app.controller("itemController",function ($scope) {
         }
         $scope.sku={id:0,title:"该商品不存在",price:0};//如果没有匹配的
     }
-    ////添加商品到购物车
-    $scope.addToCart=function () {
-        alert("skuid:"+$scope.sku.id);
+
+    //添加商品到购物车
+    $scope.addToCart=function(){
+        //alert('SKUID:'+$scope.sku.id );
+
+        $http.get('http://localhost:9107/cart/addGoodsToCartList.do?itemId='
+            +$scope.sku.id+'&num='+$scope.num ,{'withCredentials':true} ).success(
+            function(response){
+                if(response.success){
+                    location.href='http://localhost:9107/cart.html';
+                }else{
+                    alert(response.message);
+                }
+            }
+        );
+
     }
 });
