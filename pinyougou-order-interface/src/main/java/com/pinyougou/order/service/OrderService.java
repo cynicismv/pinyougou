@@ -3,6 +3,8 @@ import java.util.List;
 import com.pinyougou.pojo.TbOrder;
 
 import com.pinyougou.entity.PageResult;
+import com.pinyougou.pojo.TbPayLog;
+
 /**
  * 服务层接口
  * @author Administrator
@@ -57,5 +59,8 @@ public interface OrderService {
 	 * @return
 	 */
 	public PageResult findPage(TbOrder order, int pageNum, int pageSize);
-	
+	//根据用户查询 payLog
+	public TbPayLog searchPayLogFromRedis(String userId);
+	//修改订单状态
+	public void updateOrderStatus(String out_trade_no,String transaction_id);
 }
